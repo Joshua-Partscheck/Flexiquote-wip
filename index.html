@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexiQuote</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { font-family: 'Open Sans', Arial, sans-serif; background: #16191d; color: #ccc; font-size: 16px; }
+    .sym { font-family: 'Material Symbols Rounded'; font-style: normal; font-weight: 300; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; -webkit-font-smoothing: antialiased; display: inline-block; vertical-align: middle; }
+    input, select { font-family: 'Open Sans', Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; color: #fff; background: #2b333b; border: 1px solid #4c5967; border-radius: 6px; padding: 6px 10px; width: 100%; outline: none; margin-bottom: 16px; }
+    input::placeholder { color: #4c5967; opacity: 1; }
+    input:focus, select:focus { border-color: #4a9eff; }
+    select option { background: #2b333b; color: #fff; }
+    label { display: block; color: #fff; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+
+    .topnav { background: #2b333b; border-bottom: 1px solid #333; padding: 0 16px; height: 48px; display: flex; align-items: center; }
+    .topnav-left { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .topnav-center { display: flex; align-items: center; flex: 1; justify-content: center; }
+    .topnav-icons { display: flex; align-items: center; gap: 16px; flex-shrink: 0; margin-left: auto; }
+    .logo { color: #3b82f6; font-weight: 700; font-size: 15px; margin-right: 10px; display: flex; align-items: center; gap: 4px; }
+    .logo span { color: #fff; }
+    .nav-btn { background: none; border: none; color: #aaa; padding: 5px 10px; cursor: pointer; font-size: 16px; border-radius: 3px; display: flex; align-items: center; gap: 3px; font-family: 'Open Sans', Arial, sans-serif; }
+    .nav-btn:hover { background: #222; color: #fff; }
+    .time { color: #fff; font-weight: 600; font-size: 14px; }
+
+    .search-wrap { position: relative; }
+    .search-box { display: flex; align-items: center; background: #2b333b; border: 1px solid #4c5967; border-radius: 6px; height: 36px; padding: 0 10px; gap: 6px; }
+    .search-box:focus-within { border-color: #4a9eff; }
+    .search-icon { font-family: 'Material Symbols Rounded'; font-style: normal; font-size: 18px; color: #9ca3af; flex-shrink: 0; line-height: 1; }
+    .s-input { font-family: 'Open Sans', Arial, sans-serif !important; font-size: 14px !important; color: #fff !important; background: #2b333b !important; border: none !important; outline: none !important; width: 200px !important; margin: 0 !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+    .s-input::placeholder { color: #4c5967 !important; opacity: 1; }
+    .search-box input.s-input:focus { background: #2b333b !important; border: none !important; outline: none !important; box-shadow: none !important; }
+    .search-dropdown { display: none; position: absolute; top: calc(100% + 6px); right: 0; width: 620px; max-height: 520px; overflow-y: auto; background: #2b333b; border: 1px solid #4c5967; border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); z-index: 9998; }
+    .search-dropdown.open { display: block; }
+    .search-dropdown::-webkit-scrollbar { width: 6px; }
+    .search-dropdown::-webkit-scrollbar-track { background: #374151; }
+    .search-dropdown::-webkit-scrollbar-thumb { background: #627384; border-radius: 3px; }
+    .s-cat-hdr { padding: 10px 16px 6px; background: #16191d; display: flex; align-items: center; gap: 8px; position: sticky; top: 0; z-index: 1; }
+    .s-result { display: flex; align-items: stretch; gap: 14px; padding: 12px 16px; border-bottom: 1px solid #374151; cursor: pointer; }
+    .s-result:last-child { border-bottom: none; }
+    .s-result:hover { background: #374151; }
+    .s-car { width: 110px; min-height: 100px; background: #16191d; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; border: 1px solid #4c5967; flex-shrink: 0; align-self: stretch; overflow: hidden; padding-bottom: 6px; }
+    .s-car img { width: 100%; height: 70px; object-fit: cover; display: block; }
+    .s-car-reg { font-size: 11px; color: #9ca3af; font-weight: 600; letter-spacing: .5px; text-align: center; padding: 0 4px; }
+    .s-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .s-top { display: flex; justify-content: space-between; align-items: center; }
+    .s-quote { color: #9ca3af; font-size: 12px; font-weight: 600; }
+    .s-name { color: #fff; font-size: 14px; font-weight: 600; }
+    .s-sub { color: #fff; font-size: 12px; display: flex; gap: 12px; }
+    .s-lbl { color: #9ca3af; }
+    .s-claim { color: #fff; font-size: 11px; }
+    .s-empty { padding: 20px; text-align: center; color: #627384; font-size: 13px; }
+
+    .secondbar { background: #16191d; border-bottom: 1px solid #333; padding: 0 16px; height: 48px; display: flex; align-items: center; gap: 10px; }
+    .job-id { color: #fff; font-size: 18px; font-weight: 700; }
+    .badge-closed { background: #f59e0b; color: #000; font-size: 13px; font-weight: 700; padding: 2px 10px; border-radius: 3px; display: flex; align-items: center; gap: 3px; }
+    .badge-main { background: #3b82f6; color: #fff; font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
+    .sep { color: #444; }
+    .info-item { display: flex; align-items: center; gap: 4px; color: #aaa; font-size: 16px; }
+    .total-label { color: #6b7280; font-size: 16px; }
+    .total-val { color: #f59e0b; font-weight: 700; font-size: 16px; }
+    .total-val2 { color: #10b981; font-weight: 700; font-size: 16px; }
+    .ml-auto { margin-left: auto; }
+    .btn-save { background: #3b82f6; color: #fff; font-size: 14px; padding: 6px 16px; border-radius: 3px; border: none; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 4px; font-family: 'Open Sans', Arial, sans-serif; }
+    .btn-back { background: #374151; color: #ccc; font-size: 14px; padding: 6px 14px; border-radius: 3px; border: none; cursor: pointer; display: flex; align-items: center; gap: 3px; font-family: 'Open Sans', Arial, sans-serif; }
+    .btn-more { background: #374151; color: #ccc; padding: 4px 8px; border-radius: 3px; border: none; cursor: pointer; display: flex; align-items: center; }
+    .quote-label { color: #6b7280; font-size: 16px; }
+
+    .tabbar { background: #16191d; border-bottom: 1px solid #333; padding: 0 12px; display: flex; align-items: center; overflow-x: auto; }
+    .tab { padding: 9px 12px; color: #9ca3af; font-size: 16px; font-weight: 400; cursor: pointer; border-bottom: 2px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .tab:hover { color: #fff; }
+    .tab.active { color: #3b82f6; border-bottom: 2px solid #3b82f6; }
+    .tab .sym { font-size: 20px; }
+
+    .main { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; padding: 12px; width: 100%; box-sizing: border-box; height: calc(100vh - 48px - 48px - 42px); }
+    @media (max-width:1200px) { .main { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width:700px)  { .main { grid-template-columns: 1fr; } }
+
+    .panel { background: #2b333b; border: none; border-radius: 5px; padding: 12px; height: 100%; overflow-y: auto; }
+    .panel-title { color: #e5e7eb; font-weight: 700; font-size: 24px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #374151; padding-bottom: 8px; }
+    .ntar-badge { background: #1d4ed8; color: #93c5fd; font-size: 9px; padding: 2px 6px; border-radius: 2px; font-weight: 600; }
+    .key-badge  { background: #374151; color: #9ca3af; font-size: 9px; padding: 2px 8px; border-radius: 2px; }
+    .form-row  { display: grid; gap: 8px; }
+    .g2        { grid-template-columns: 1fr 1fr; }
+    .form-group { display: flex; flex-direction: column; }
+    .add-btn { background: #3b82f6; color: #fff; border: none; border-radius: 3px; width: 26px; height: 34px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; align-self: flex-end; margin-bottom: 16px; }
+    .rego-btn { background: #1d4ed8; color: #93c5fd; border: 1px solid #2563eb; border-radius: 3px; padding: 0 10px; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 3px; white-space: nowrap; height: 38px; align-self: flex-end; margin-bottom: 16px; font-family: 'Open Sans', Arial, sans-serif; }
+    .schedules-btn { background: none; border: none; color: #6b7280; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 2px; align-self: flex-end; padding: 4px 6px; margin-bottom: 16px; font-family: 'Open Sans', Arial, sans-serif; }
+    .add-circle { background: #374151; border: none; color: #9ca3af; width: 22px; height: 22px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .phone-row { display: flex; gap: 4px; align-items: center; margin-bottom: 16px; }
+    .phone-row input, .phone-row select { margin-bottom: 0; }
+    .star-btn, .del-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; }
+    .alt-contact { color: #3b82f6; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 3px; margin-bottom: 8px; }
+    .radio-group { display: flex; gap: 8px; align-items: center; }
+    .radio-group label { display: flex; align-items: center; gap: 3px; cursor: pointer; color: #9ca3af; margin: 0; font-size: 13px; font-weight: 400; }
+    .radio-group input[type="radio"] { width: auto; margin-bottom: 0; }
+    .method-toggle { display: flex; gap: 6px; margin-bottom: 16px; }
+    .method-btn { background: #374151; border: 1px solid #4b5563; color: #9ca3af; border-radius: 3px; padding: 3px 10px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 3px; font-family: 'Open Sans', Arial, sans-serif; }
+    .method-btn.active { background: #1d4ed8; border-color: #2563eb; color: #93c5fd; }
+    .includes-gst { display: flex; align-items: center; gap: 3px; font-size: 12px; color: #6b7280; margin-bottom: 2px; }
+    .includes-gst input[type="radio"] { width: auto; margin-bottom: 0; }
+    .toggle-row { display: flex; align-items: center; gap: 6px; padding-top: 4px; }
+    .toggle { width: 32px; height: 16px; background: #374151; border-radius: 8px; position: relative; cursor: pointer; border: none; flex-shrink: 0; }
+    .toggle::after { content: ''; position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; background: #6b7280; border-radius: 50%; }
+    .date-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 4px; }
+    .date-field { position: relative; }
+    .date-field input { padding-left: 26px; margin-bottom: 0; }
+    .date-icon { position: absolute; left: 6px; top: 50%; transform: translateY(-50%); color: #6b7280; font-family: 'Material Symbols Rounded'; font-size: 14px; pointer-events: none; line-height: 1; font-style: normal; }
+    .yes-no { display: flex; gap: 8px; align-items: center; padding-top: 4px; }
+    .yes-no label { display: flex; align-items: center; gap: 3px; cursor: pointer; color: #9ca3af; margin: 0; font-size: 13px; font-weight: 400; }
+    .yes-no input[type="radio"] { width: auto; margin-bottom: 0; }
+    .clear-btn { background: none; border: none; color: #6b7280; cursor: pointer; display: flex; align-items: center; flex-shrink: 0; }
+
+    /* Modal */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 9999; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .chk-row { display: flex; align-items: center; gap: 8px; }
+    .chk-row input[type="checkbox"], .chk-row input[type="radio"] { width: 16px; height: 16px; accent-color: #3b82f6; cursor: pointer; flex-shrink: 0; margin: 0; }
+    .chk-row label { color: #e5e7eb; font-size: 13px; cursor: pointer; margin: 0; font-weight: 400; }
+    .divider { border: none; border-top: 1px solid #4a5568; margin: 12px 0; }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="topnav-left">
+    <div class="logo"><span class="sym" style="color:#3b82f6;font-size:18px">check_circle</span><span>FLEXIQUOTE</span></div>
+    <button class="nav-btn">Quote <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
+    <button class="nav-btn">Debtor <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
+    <button class="nav-btn">Creditor <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
+    <button class="nav-btn">Reports <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
+    <button class="nav-btn">Tables <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
+    <button class="nav-btn">Admin <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
+  </div>
+  <div class="topnav-center">
+    <div class="search-wrap">
+      <div class="search-box">
+        <span class="search-icon">search</span>
+        <input class="s-input" type="text" id="topSearch" placeholder="Search...">
+      </div>
+      <div class="search-dropdown" id="searchDropdown">
+        <div id="searchResults"></div>
+        <div id="sEmpty" class="s-empty" style="display:none">No results found</div>
+      </div>
+    </div>
+  </div>
+  <div class="topnav-icons">
+    <span class="sym" style="font-size:20px;color:#6b7280">dark_mode</span>
+    <span class="sym" style="font-size:20px;color:#6b7280">notifications</span>
+    <span class="time">2:16 PM</span>
+    <span style="font-size:13px;color:#9ca3af">PartsCheck</span>
+  </div>
+</nav>
+
+<!-- SECOND BAR -->
+<div class="secondbar">
+  <span class="job-id">27632</span>
+  <div class="badge-closed">Closed <span class="sym" style="font-size:14px">expand_more</span></div>
+  <span class="sep">|</span><span class="quote-label">Quote:</span>
+  <span class="badge-main">Main</span>
+  <span class="sep">|</span>
+  <div class="info-item"><span class="sym" style="font-size:20px">person</span> Pwa User, Test0</div>
+  <span class="sep">|</span>
+  <div class="info-item"><span class="sym" style="font-size:20px">directions_car</span> TEST3003 - FORD F...</div>
+  <span class="sep">|</span>
+  <span class="total-label">Total (Ex GST)</span>&nbsp;<span class="total-val">$468.00</span>&nbsp;
+  <span class="total-label">Total (Inc GST)</span>&nbsp;<span class="total-val2">$514.80</span>
+  <div class="ml-auto" style="display:flex;gap:6px;align-items:center">
+    <button class="btn-save"><span class="sym" style="font-size:18px">save</span> Save</button>
+    <button class="btn-back"><span class="sym" style="font-size:18px">arrow_back</span> Back</button>
+    <button class="btn-more" id="moreBtn"><span class="sym" style="font-size:20px">more_vert</span></button>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tabbar">
+  <div class="tab active" id="tabHeader"><span class="sym">home</span> Header</div>
+  <div class="tab"><span class="sym">request_quote</span> Quoting</div>
+  <div class="tab"><span class="sym">build</span> Parts</div>
+  <div class="tab" id="tabImages"><span class="sym">image</span> Images</div>
+  <div class="tab"><span class="sym">description</span> ORM</div>
+  <div class="tab"><span class="sym">bar_chart</span> Summary</div>
+  <div class="tab" id="tabInvoice"><span class="sym">receipt</span> Invoice</div>
+  <div class="tab"><span class="sym">bolt</span> Excess</div>
+  <div class="tab"><span class="sym">folder</span> Docs</div>
+  <div class="tab"><span class="sym">chat</span> Comms</div>
+  <div class="tab"><span class="sym">edit_note</span> Remarks</div>
+  <div class="tab"><span class="sym">percent</span> Rates &amp; Markups</div>
+  <div class="tab"><span class="sym">draw</span> Annotations</div>
+</div>
+
+<!-- HEADER VIEW -->
+<div class="main" id="headerView">
+  <div class="panel">
+    <div class="panel-title"><span class="sym" style="font-size:24px">directions_car</span> Vehicle <span class="ntar-badge">NTAR Hours On - F633</span><span class="key-badge" style="margin-left:auto">Key No. 0000</span></div>
+    <div style="display:flex;gap:6px;align-items:flex-end">
+      <div class="form-group" style="flex:1"><label>Registration No. <span style="color:#ef4444">*</span></label><input value="TEST3003"></div>
+      <div class="form-group" style="width:90px"><label>State</label><select><option>NSW</option><option>VIC</option><option>QLD</option></select></div>
+      <button class="rego-btn"><span class="sym" style="font-size:16px">search</span> Rego Lookup</button>
+    </div>
+    <div><label>Make / Model <span style="color:#ef4444">*</span></label>
+      <div style="display:flex;gap:4px;align-items:center"><input value="FORD FALCON XE GL" style="flex:1"><button class="add-btn"><span class="sym" style="font-size:16px">add</span></button><button class="schedules-btn"><span class="sym" style="font-size:14px">calendar_month</span> Schedules</button></div>
+    </div>
+    <div class="form-row g2"><div class="form-group"><label>Body Style <span style="color:#ef4444">*</span></label><select><option>4 DOOR</option></select></div><div class="form-group"><label>Body Style 2</label><select><option>4wd4Door</option></select></div></div>
+    <div class="form-row g2"><div class="form-group"><label>Paint Group <span style="color:#ef4444">*</span></label><select><option>Metallic 1</option></select></div><div class="form-group"><label>Build Date</label><div style="display:flex;gap:3px"><select style="width:46px;margin-bottom:16px"><option>01</option></select><select style="width:46px;margin-bottom:16px"><option>▼</option></select><input value="1982"></div></div></div>
+    <div class="form-row g2"><div class="form-group"><label>Transmission</label><select><option>Automatic</option></select></div><div class="form-group"><label>Colour</label><input value="Cream"></div></div>
+    <div class="form-row g2"><div class="form-group"><label>VIN</label><input value="JTMHV01J704264675"></div><div class="form-group"><label>Engine No.</label><input value="v8"></div></div>
+    <div class="form-group"><label>Odometer</label><input value="0"></div>
+    <div class="form-row g2"><div class="form-group"><label>Cylinders</label><input placeholder="e.g. 6"></div><div class="form-group"><label>Engine Size</label><input placeholder="e.g. 1300"></div></div>
+    <div class="form-row g2"><div class="form-group"><label>Trim Code</label><input></div><div class="form-group"><label>Paint Code</label><input></div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title" style="justify-content:space-between"><span style="display:flex;align-items:center;gap:6px"><span class="sym" style="font-size:24px">person</span> Customer</span><div class="radio-group"><label><input type="radio" name="ctype"> Company</label><label><input type="radio" name="ctype" checked> Person</label></div></div>
+    <div class="form-row g2"><div class="form-group"><label>First Name <span style="color:#ef4444">*</span></label><input value="Test0"></div><div class="form-group"><label>Last Name <span style="color:#ef4444">*</span></label><input value="Pwa User"></div></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="color:#aaa;font-size:13px">Emails</span><button class="add-circle"><span class="sym" style="font-size:14px">add</span></button></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="color:#aaa;font-size:13px">Phones</span><button class="add-circle"><span class="sym" style="font-size:14px">add</span></button></div>
+    <div class="phone-row"><select style="width:60px"><option>M</option><option>H</option><option>W</option></select><input value="856505659" style="flex:1;margin-bottom:0"><button class="star-btn"><span class="sym" style="color:#f59e0b;font-size:18px">star</span></button><button class="del-btn"><span class="sym" style="color:#ef4444;font-size:18px">remove_circle</span></button></div>
+    <div class="alt-contact"><span class="sym" style="font-size:14px">add</span> Alternative Customer Contact</div>
+    <div><label>Address</label><div style="display:flex;gap:4px"><select style="width:50px"><option>H</option></select><input placeholder="Start typing address" style="flex:1"></div></div>
+    <div class="form-group"><label>Suburb</label><input placeholder="Suburb"></div>
+    <div class="form-group"><label>State</label><input placeholder="State"></div>
+    <div class="form-row g2"><div class="form-group"><label>Postal code</label><input placeholder="Postal code"></div><div class="form-group"><label>Country</label><input placeholder="Country"></div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title"><span class="sym" style="font-size:24px">shield</span> Insurer/Debtor</div>
+    <div class="form-group"><label>Insurer <span style="color:#ef4444">*</span></label><select><option>Insurance Australia Limited</option></select></div>
+    <div class="form-group"><label>ABN</label><div style="display:flex;gap:4px;align-items:center"><input value="11 000 016 722" style="flex:1"><span class="sym" style="color:#22c55e;font-size:20px">check_circle</span></div></div>
+    <div class="form-row g2"><div class="form-group"><label>Claim Number</label><input value="CL00014"></div><div class="form-group"><label>Policy Number</label><input placeholder="Policy No."></div></div>
+    <div class="form-row g2"><div class="form-group"><label>Labour Times</label><select><option>NTAR</option><option>MOTOR</option></select></div><div class="form-group"><label>Method</label><div class="method-toggle"><button class="method-btn active"><span class="sym" style="font-size:14px">schedule</span> Hours</button><button class="method-btn"><span class="sym" style="font-size:14px">attach_money</span> Dollars</button></div></div></div>
+    <div class="form-row g2"><div><div class="includes-gst"><span>Excess</span><input type="radio" name="gst" style="width:auto;margin:0 4px"><span>Includes GST</span></div><input value="0.00"></div><div class="form-group"><label>Owners Contribution</label><input value="0.00"></div></div>
+    <div class="form-group"><label>Discount On Invoice</label><input value="$ 0.00"></div>
+    <div class="form-row g2"><div class="form-group"><label>Assessor</label><input placeholder="Assessor"></div><div class="form-group"><label>Phone Number</label><input placeholder="xxxxxxxxx"></div></div>
+    <div class="form-group"><label>Estimator</label><input placeholder="Quoter"></div>
+    <div class="form-group"><label>Is Towed</label><div class="toggle-row"><button class="toggle"></button><span style="color:#9ca3af">No</span></div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title"><span class="sym" style="font-size:24px">calendar_today</span> Key Dates</div>
+    <div class="form-group"><label>Request for Quote Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input value="11/03/2026"></div></div>
+    <div class="date-grid"><div class="form-group"><label>Inspection Booking</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Inspection Start Date"></div></div><div class="form-group"><label>Booking Attended</label><div style="color:#9ca3af;padding-top:6px;font-size:13px">No</div></div></div>
+    <div class="date-grid"><div class="form-group"><label>Sent for Authority</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Sent for Assessment"></div></div><div class="form-group"><label>Authority Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Authority Date"></div></div></div>
+    <div class="date-grid"><div class="form-group"><label>Refuse Book Repair Reason</label><input></div><div class="form-group"><label>Is Repair Booked</label><div class="yes-no"><label><input type="radio" name="repair"> Yes</label><label><input type="radio" name="repair" checked> No</label></div></div></div>
+    <div class="date-grid"><div class="form-group"><label>Estimated Start Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Job Start Date"></div></div><div class="form-group"><label>Estimated End Date</label><div style="display:flex;align-items:center;gap:3px"><div class="date-field" style="flex:1"><span class="date-icon">calendar_month</span><input placeholder="Job End Date"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div></div>
+    <div class="date-grid"><div class="form-group"><label>Vehicle Arrived</label><div style="display:flex;align-items:center;gap:3px"><div class="date-field" style="flex:1"><span class="date-icon">calendar_month</span><input placeholder="Arrive for Repair Date"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div><div class="form-group"><label>Vehicle On Site</label><div class="toggle-row"><button class="toggle"></button><span style="color:#9ca3af">No</span></div></div></div>
+    <div class="date-grid"><div class="form-group"><label>Job Start Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Job Start"></div></div><div class="form-group"><label>Job Completed Date</label><div style="display:flex;align-items:center;gap:3px"><div class="date-field" style="flex:1"><span class="date-icon">calendar_month</span><input placeholder="Job Completion"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div></div>
+    <div class="date-grid"><div class="form-group"><label>Vehicle Picked Up</label><div style="display:flex;align-items:center;gap:3px"><div class="date-field" style="flex:1"><span class="date-icon">calendar_month</span><input placeholder="Vehicle Departed Date"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div><div class="form-group"><label>Vehicle Departed</label><div class="toggle-row"><button class="toggle"></button><span style="color:#9ca3af">No</span></div></div></div>
+  </div>
+</div>
+
+<!-- IMAGES VIEW -->
+<div id="imagesView" style="display:none;padding:16px;height:calc(100vh - 48px - 48px - 42px);overflow-y:auto">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
+    <div><h2 style="color:#e5e7eb;font-size:22px;font-weight:700;margin-bottom:4px">Images</h2><p style="color:#9ca3af;font-size:13px">Manage quote images</p></div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button style="background:#374151;border:none;border-radius:4px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="sym" style="font-size:18px;color:#9ca3af">grid_view</span></button>
+      <button style="background:#374151;border:none;border-radius:4px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="sym" style="font-size:18px;color:#9ca3af">view_list</span></button>
+      <button style="background:#374151;border:none;border-radius:4px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="sym" style="font-size:18px;color:#9ca3af">refresh</span></button>
+      <button style="background:#374151;border:none;border-radius:4px;padding:0 14px;height:34px;cursor:pointer;display:flex;align-items:center;gap:6px;color:#e5e7eb;font-size:13px;font-family:'Open Sans',Arial,sans-serif"><span class="sym" style="font-size:16px;color:#3b82f6">add</span> Add Categories</button>
+      <button style="background:#3b82f6;border:none;border-radius:4px;padding:0 14px;height:34px;cursor:pointer;display:flex;align-items:center;gap:6px;color:#fff;font-size:13px;font-weight:600;font-family:'Open Sans',Arial,sans-serif"><span class="sym" style="font-size:16px">add</span> Add</button>
+    </div>
+  </div>
+  <div id="imageCategoryList"></div>
+</div>
+
+<!-- INVOICE VIEW -->
+<div id="invoiceView" style="display:none;padding:12px;height:calc(100vh - 48px - 48px - 42px);overflow:auto">
+  <div style="display:grid;grid-template-columns:1fr 400px;gap:12px">
+    <div class="panel" style="height:auto">
+      <div class="panel-title" style="justify-content:space-between">
+        <span style="display:flex;align-items:center;gap:8px"><span class="sym" style="font-size:24px">receipt</span> Invoice</span>
+        <div style="display:flex;gap:8px">
+          <button style="background:#3b82f6;border:none;border-radius:4px;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="sym" style="font-size:18px;color:#fff">edit</span></button>
+          <button style="background:#ef4444;border:none;border-radius:4px;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="sym" style="font-size:18px;color:#fff">delete</span></button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #374151">
+        <div><label>Invoice No.</label><div style="color:#fff;font-size:16px;padding-top:4px">50195/1</div></div>
+        <div><label>Invoice Date</label><div style="color:#fff;font-size:16px;padding-top:4px">11/03/2026</div></div>
+      </div>
+      <div style="margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #374151"><label>Payer</label><div style="color:#fff;font-size:16px;padding-top:4px">Insurance Australia Limited</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><label style="margin:0">Excess</label><div style="display:flex;align-items:center;gap:4px;margin-left:auto"><input type="radio" name="excessGst" style="width:auto;margin:0"><span style="color:#9ca3af;font-size:12px">Excess with GST</span></div></div><input value="0.00" style="text-align:right"></div>
+        <div><label>Owner Contribution</label><input value="0.00" style="text-align:right"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+        <div><label>Discount</label><input value="0.00" style="text-align:right"></div>
+        <div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><label style="margin:0">GST</label><div style="display:flex;align-items:center;gap:4px"><span style="color:#9ca3af;font-size:12px">Fixed</span><input type="radio" name="gstFixed" style="width:auto;margin:0"></div></div><input value="46.80" style="text-align:right"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:24px"><input type="checkbox" style="width:16px;height:16px;margin:0;accent-color:#3b82f6"><label style="color:#9ca3af;font-size:14px;font-weight:400;margin:0">Exported</label></div>
+      <div style="border-top:1px solid #374151;padding-top:16px;margin-bottom:24px">
+        <div style="display:flex;justify-content:flex-end">
+          <div style="width:320px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="color:#9ca3af;font-size:13px">Total <span style="font-size:10px">(Ex GST)</span></span><span style="color:#10b981;font-weight:700;font-size:15px">$468.00</span></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:10px"><span style="color:#9ca3af;font-size:13px">GST</span><span style="color:#9ca3af;font-size:15px">+ $46.80</span></div>
+            <div style="display:flex;justify-content:space-between;border-top:1px solid #374151;padding-top:10px"><span style="color:#9ca3af;font-size:13px">Total Payable <span style="font-size:10px">(Inc GST)</span></span><span style="color:#10b981;font-weight:700;font-size:18px">$514.80</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px"><input type="checkbox" style="width:16px;height:16px;margin:0;accent-color:#3b82f6"><label style="color:#9ca3af;font-size:14px;font-weight:400;margin:0">GST Invoice</label></div>
+    </div>
+    <div class="panel" style="height:auto">
+      <div class="panel-title"><span class="sym" style="font-size:24px">edit_note</span> Remarks</div>
+      <div class="form-group"><label>Remark</label><textarea placeholder="Enter remarks..." style="background:#2b333b;border:1px solid #4c5967;border-radius:6px;color:#fff;font-family:'Open Sans',Arial,sans-serif;font-size:14px;padding:10px;width:100%;height:200px;outline:none;resize:vertical"></textarea></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRINT MODAL — only one, properly inside the overlay -->
+<div class="modal-overlay" id="printModal">
+  <div style="background:#2b333b;border-radius:8px;width:900px;max-width:97vw;box-shadow:0 20px 60px rgba(0,0,0,0.8)">
+    <div style="display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid #374151">
+      <span class="sym" style="color:#3b82f6;font-size:22px">print</span>
+      <span style="color:#e5e7eb;font-weight:700;font-size:16px">Print Options</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr">
+      <!-- LEFT -->
+      <div style="padding:24px 28px;border-right:1px solid #374151">
+        <div style="font-weight:700;color:#e5e7eb;font-size:15px;margin-bottom:14px">Select Quote</div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+          <div class="chk-row"><input type="checkbox" id="sqMain"><label for="sqMain">Main</label></div>
+          <div class="chk-row"><input type="checkbox" id="sqSupp1" checked><label for="sqSupp1">Supp 1</label></div>
+        </div>
+        <hr class="divider">
+        <div style="font-weight:700;color:#e5e7eb;font-size:13px;margin-bottom:14px">Quote Report options</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+          <div class="chk-row"><input type="checkbox" id="chkHours"><label for="chkHours">Hours Dollar Quote</label></div>
+          <div class="chk-row"><input type="checkbox" id="chkDollar"><label for="chkDollar">Dollar Only Quote</label></div>
+        </div>
+        <hr class="divider">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 10px">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div class="chk-row"><input type="checkbox" id="chkItem"><label for="chkItem">Item Number</label></div>
+            <div class="chk-row"><input type="checkbox" id="chkIndiv"><label for="chkIndiv">Individual Item Hours</label></div>
+            <div class="chk-row"><input type="checkbox" id="chkParts"><label for="chkParts">Parts List Price</label></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div class="chk-row"><input type="radio" name="pType" id="rAfter" checked><label for="rAfter">Print "After Market"</label></div>
+            <div class="chk-row"><input type="radio" name="pType" id="rParallel"><label for="rParallel">Print "Parallel"</label></div>
+            <div class="chk-row"><input type="radio" name="pType" id="rRecycled"><label for="rRecycled">Print "Recycled OEM Parts"</label></div>
+            <div class="chk-row"><input type="radio" name="pType" id="rParOEM"><label for="rParOEM">Print "Parallel OEM Parts"</label></div>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT -->
+      <div style="padding:24px 28px">
+        <div style="font-weight:700;color:#e5e7eb;font-size:15px;margin-bottom:14px">Select additional reports to print</div>
+        <div class="chk-row" style="margin-bottom:10px">
+          <input type="checkbox" id="rJobCard" checked>
+          <label for="rJobCard">Job Card</label>
+        </div>
+
+        <div id="jobCardOptions" style="margin-left:24px;margin-bottom:14px">
+          <div style="font-weight:700;color:#e5e7eb;font-size:13px;margin-bottom:10px">Job Card report options</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
+            <div class="chk-row"><input type="radio" name="jcHours" id="jcCategory"><label for="jcCategory">Category Target Hours</label></div>
+            <div class="chk-row"><input type="radio" name="jcHours" id="jcIndividual" checked><label for="jcIndividual">Individual Item Hours</label></div>
+            <div class="chk-row"><input type="radio" name="jcHours" id="jcNone"><label for="jcNone">Do not print Hours</label></div>
+          </div>
+          <div style="display:flex;gap:16px">
+            <div><label style="font-size:12px;font-weight:700;color:#e5e7eb;display:block;margin-bottom:4px">R &amp; R %</label><div style="display:flex"><input type="number" value="100" style="text-align:right;margin-bottom:0;width:65px;border-radius:6px 0 0 6px;border-right:none"><span style="background:#374151;border:1px solid #4c5967;border-left:none;color:#9ca3af;padding:6px 8px;border-radius:0 6px 6px 0;font-size:13px;line-height:24px">%</span></div></div>
+            <div><label style="font-size:12px;font-weight:700;color:#e5e7eb;display:block;margin-bottom:4px">Repair %</label><div style="display:flex"><input type="number" value="100" style="text-align:right;margin-bottom:0;width:65px;border-radius:6px 0 0 6px;border-right:none"><span style="background:#374151;border:1px solid #4c5967;border-left:none;color:#9ca3af;padding:6px 8px;border-radius:0 6px 6px 0;font-size:13px;line-height:24px">%</span></div></div>
+            <div><label style="font-size:12px;font-weight:700;color:#e5e7eb;display:block;margin-bottom:4px">Paint %</label><div style="display:flex"><input type="number" value="100" style="text-align:right;margin-bottom:0;width:65px;border-radius:6px 0 0 6px;border-right:none"><span style="background:#374151;border:1px solid #4c5967;border-left:none;color:#9ca3af;padding:6px 8px;border-radius:0 6px 6px 0;font-size:13px;line-height:24px">%</span></div></div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="chk-row"><input type="checkbox" id="rCover"><label for="rCover">Job Cover Sheet</label></div>
+          <div class="chk-row"><input type="checkbox" id="rSupp"><label for="rSupp">Supplementary Sheet</label></div>
+          <div class="chk-row"><input type="checkbox" id="rFinal"><label for="rFinal">Final Check</label></div>
+          <div class="chk-row"><input type="checkbox" id="rClearAdv"><label for="rClearAdv">Clearance Advice</label></div>
+          <div class="chk-row"><input type="checkbox" id="rClearCert"><label for="rClearCert">Clearance Certificate</label></div>
+          <div class="chk-row"><input type="checkbox" id="rCRPAN"><label for="rCRPAN">Customer Repair &amp; Payment Authority Notification</label></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;align-items:center;gap:8px;padding:14px 20px;border-top:1px solid #374151">
+      <div style="display:flex;align-items:center;gap:6px;font-size:14px;color:#9ca3af;margin-right:auto">
+        <span class="sym" style="font-size:18px;color:#fff;flex-shrink:0">info</span>
+        Image attachment limit: <strong style="margin-left:4px">15</strong>
+      </div>
+      <button id="okBtn" style="background:#22c55e;color:#fff;border:none;border-radius:4px;padding:7px 20px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'Open Sans',Arial,sans-serif"><span class="sym" style="font-size:16px">print</span> Ok</button>
+      <button id="attachBtn" style="background:#3b82f6;color:#fff;border:none;border-radius:4px;padding:7px 14px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'Open Sans',Arial,sans-serif;font-size:12px;font-weight:600"><span class="sym" style="font-size:16px">attach_file</span> Attach Images</button>
+      <button id="cancelBtn" style="background:#4b5563;color:#e5e7eb;border:none;border-radius:4px;padding:7px 20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Open Sans',Arial,sans-serif">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  function $(id) { return document.getElementById(id); }
+  function hl(str, q) {
+    if (!str || !q) return str || '';
+    var esc = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return str.replace(new RegExp('(' + esc + ')', 'gi'),
+      '<mark style="background:#1d4ed8;color:#fff;border-radius:2px;padding:0 2px">$1</mark>');
+  }
+
+  var VIEWS = { header: 'headerView', images: 'imagesView', invoice: 'invoiceView' };
+  var TABS  = { header: 'tabHeader',  images: 'tabImages',  invoice: 'tabInvoice'  };
+
+  window.switchTab = function (tab) {
+    Object.keys(VIEWS).forEach(function (k) {
+      var v = $(VIEWS[k]); var t = $(TABS[k]);
+      if (v) v.style.display = 'none';
+      if (t) t.classList.remove('active');
+    });
+    var av = $(VIEWS[tab]); var at = $(TABS[tab]);
+    if (av) av.style.display = tab === 'header' ? 'grid' : 'block';
+    if (at) at.classList.add('active');
+  };
+
+  ready(function () {
+
+    $('tabHeader').addEventListener('click',  function () { switchTab('header'); });
+    $('tabImages').addEventListener('click',  function () { switchTab('images'); });
+    $('tabInvoice').addEventListener('click', function () { switchTab('invoice'); });
+
+    var modal = $('printModal');
+    function openModal()  { modal.style.display = 'flex'; }
+    function closeModal() { modal.style.display = 'none'; }
+    $('moreBtn').addEventListener('click',   function (e) { e.stopPropagation(); openModal(); });
+    modal.addEventListener('click',          function (e) { if (e.target === modal) closeModal(); });
+    $('okBtn').addEventListener('click',     closeModal);
+    $('cancelBtn').addEventListener('click', closeModal);
+    $('attachBtn').addEventListener('click', function () { closeModal(); switchTab('images'); });
+
+    $('rJobCard').addEventListener('change', function () {
+      $('jobCardOptions').style.display = this.checked ? 'block' : 'none';
+    });
+
+    var IMAGE_CATS = [
+      { name: 'General',              icon: 'photo_library',  priv: false },
+      { name: 'Pre-Existing Damage',  icon: 'warning',        priv: false },
+      { name: 'Claimed Damage',       icon: 'car_crash',      priv: false },
+      { name: 'Supplementary Damage', icon: 'add_circle',     priv: false },
+      { name: 'In Progress',          icon: 'build',          priv: false },
+      { name: 'Completed',            icon: 'check_circle',   priv: false },
+      { name: 'Private',              icon: 'visibility_off', priv: true  },
+      { name: 'Customer Uploaded',    icon: 'upload',         priv: true  },
+      { name: 'Test Category',        icon: 'folder',         priv: false }
+    ];
+
+    var catList = $('imageCategoryList');
+    IMAGE_CATS.forEach(function (cat) {
+      var lbl = document.createElement('div');
+      lbl.style.cssText = 'display:flex;align-items:center;gap:8px;margin-top:16px;margin-bottom:8px';
+      lbl.innerHTML = '<span class="sym" style="font-size:18px;color:#9ca3af">' + cat.icon + '</span>'
+        + '<span style="color:#e5e7eb;font-size:15px;font-weight:600">' + cat.name + '</span>'
+        + (cat.priv ? '<span class="sym" style="font-size:16px;color:#6b7280">visibility_off</span>' : '');
+      var zone = document.createElement('div');
+      zone.style.cssText = 'border:1.5px dashed #4c5967;border-radius:6px;min-height:64px;background:#1f2937;display:flex;align-items:center;flex-wrap:wrap;padding:8px;gap:8px;cursor:pointer;transition:border-color .2s;margin-bottom:4px';
+      var inp = document.createElement('input');
+      inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true; inp.style.display = 'none';
+      document.body.appendChild(inp);
+      var ph = document.createElement('div');
+      ph.style.cssText = 'color:#6b7280;font-size:12px;display:flex;align-items:center;gap:4px;pointer-events:none';
+      ph.innerHTML = '<span class="sym" style="font-size:16px">add_photo_alternate</span> Drop images or click to upload';
+      zone.appendChild(ph);
+      function addThumb(src) {
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'position:relative;width:90px;height:70px;border-radius:4px;overflow:hidden;flex-shrink:0';
+        var img = document.createElement('img');
+        img.src = src; img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;pointer-events:none';
+        var btn = document.createElement('button');
+        btn.style.cssText = 'position:absolute;top:2px;right:2px;background:rgba(0,0,0,.65);border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;z-index:2;padding:0';
+        btn.innerHTML = '<span class="sym" style="font-size:13px;pointer-events:none">close</span>';
+        btn.addEventListener('click', function (e) { e.stopPropagation(); wrap.remove(); });
+        wrap.appendChild(img); wrap.appendChild(btn);
+        zone.insertBefore(wrap, ph);
+      }
+      zone.addEventListener('click',      function ()  { inp.click(); });
+      zone.addEventListener('mouseenter', function ()  { zone.style.borderColor = '#3b82f6'; });
+      zone.addEventListener('mouseleave', function ()  { zone.style.borderColor = '#4c5967'; });
+      zone.addEventListener('dragover',   function (e) { e.preventDefault(); zone.style.borderColor = '#3b82f6'; });
+      zone.addEventListener('dragleave',  function ()  { zone.style.borderColor = '#4c5967'; });
+      zone.addEventListener('drop', function (e) {
+        e.preventDefault(); zone.style.borderColor = '#4c5967';
+        Array.from(e.dataTransfer.files).filter(function (f) { return f.type.startsWith('image/'); })
+          .forEach(function (f) { var r = new FileReader(); r.onload = function (ev) { addThumb(ev.target.result); }; r.readAsDataURL(f); });
+      });
+      inp.addEventListener('change', function () {
+        Array.from(inp.files).forEach(function (f) { var r = new FileReader(); r.onload = function (ev) { addThumb(ev.target.result); }; r.readAsDataURL(f); });
+        inp.value = '';
+      });
+      catList.appendChild(lbl);
+      catList.appendChild(zone);
+    });
+
+    var CAR_IMGS = [
+      'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=320&h=180&fit=crop',
+      'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=320&h=180&fit=crop',
+      'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=320&h=180&fit=crop',
+      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=320&h=180&fit=crop',
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=320&h=180&fit=crop'
+    ];
+    var SD = {
+      quotes: [
+        { reg:'TEST3003', name:'FORD FALCON XE GL', quote:'#27632', invoice:'INV-10041', claim:'CL00014', customer:'Pwa User, Test0', phone:'856505659',  colour:'Cream',  insurer:'Insurance Australia Limited', img:0 },
+        { reg:'ABC1234',  name:'TOYOTA CAMRY',      quote:'#27401', invoice:'INV-10038', claim:'CL00021', customer:'John Smith',       phone:'0412345678', colour:'Silver', insurer:'NRMA Insurance',               img:1 },
+        { reg:'XYZ9876',  name:'HONDA CIVIC',       quote:'#27389', invoice:'INV-10029', claim:'CL00035', customer:'Sarah Jones',      phone:'0398765432', colour:'Blue',   insurer:'Allianz Australia',            img:2 },
+        { reg:'DEF4567',  name:'MAZDA CX-5',        quote:'#27210', invoice:'INV-10017', claim:'CL00018', customer:'Mike Wilson',      phone:'0423111222', colour:'Red',    insurer:'AAMI',                         img:3 },
+        { reg:'GHI7890',  name:'NISSAN NAVARA',     quote:'#27105', invoice:'INV-10005', claim:'CL00042', customer:'Lisa Brown',       phone:'0756789012', colour:'White',  insurer:'Budget Direct',                img:4 }
+      ],
+      pos: [
+        { reg:'TEST3003', name:'FORD FALCON XE GL', po:'PO-00123', quote:'#27632', supplier:'AutoParts Co.',    amount:'$210.00', img:0 },
+        { reg:'ABC1234',  name:'TOYOTA CAMRY',      po:'PO-00118', quote:'#27401', supplier:'National Parts',   amount:'$85.50',  img:1 },
+        { reg:'XYZ9876',  name:'HONDA CIVIC',       po:'PO-00115', quote:'#27389', supplier:'Smith Supplies',   amount:'$340.00', img:2 },
+        { reg:'DEF4567',  name:'MAZDA CX-5',        po:'PO-00109', quote:'#27210', supplier:'Metro Auto Parts', amount:'$175.00', img:3 },
+        { reg:'GHI7890',  name:'NISSAN NAVARA',     po:'PO-00102', quote:'#27105', supplier:'QLD Parts Direct', amount:'$520.00', img:4 }
+      ],
+      invoices: [
+        { reg:'TEST3003', name:'FORD FALCON XE GL', invoice:'INV-10041', quote:'#27632', date:'11/03/2026', customer:'Pwa User, Test0', img:0 },
+        { reg:'ABC1234',  name:'TOYOTA CAMRY',      invoice:'INV-10038', quote:'#27401', date:'08/03/2026', customer:'John Smith',      img:1 },
+        { reg:'XYZ9876',  name:'HONDA CIVIC',       invoice:'INV-10029', quote:'#27389', date:'02/03/2026', customer:'Sarah Jones',     img:2 },
+        { reg:'DEF4567',  name:'MAZDA CX-5',        invoice:'INV-10017', quote:'#27210', date:'25/02/2026', customer:'Mike Wilson',     img:3 },
+        { reg:'GHI7890',  name:'NISSAN NAVARA',     invoice:'INV-10005', quote:'#27105', date:'18/02/2026', customer:'Lisa Brown',      img:4 }
+      ]
+    };
+
+    function filterCat(items, fields, ql) {
+      return items.filter(function (d) {
+        return fields.some(function (f) { return d[f] && d[f].toLowerCase().indexOf(ql) !== -1; });
+      });
+    }
+    function carBox(d, q) {
+      return '<div class="s-car">'
+        + '<img src="' + CAR_IMGS[d.img] + '" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+        + '<div style="display:none;width:100%;height:70px;align-items:center;justify-content:center;background:#16191d"><span class="sym" style="font-size:32px;color:#627384">directions_car</span></div>'
+        + '<span class="s-car-reg">' + hl(d.reg, q) + '</span>'
+        + '</div>';
+    }
+    function catHdr(label, icon) {
+      return '<div class="s-cat-hdr"><span class="sym" style="font-size:16px;color:#9ca3af">' + icon + '</span><span style="font-size:14px;font-weight:700;color:#e5e7eb">' + label + '</span></div>';
+    }
+    function qRow(d, q) {
+      return '<div class="s-result">' + carBox(d, q)
+        + '<div class="s-info">'
+        + '<div class="s-top"><span class="s-quote">' + hl(d.quote, q) + '</span></div>'
+        + '<div class="s-name">' + hl(d.name, q) + '</div>'
+        + '<div class="s-sub"><span><span class="s-lbl">Customer:</span> ' + hl(d.customer, q) + '</span><span><span class="s-lbl">Ph:</span> ' + hl(d.phone, q) + '</span></div>'
+        + '<div class="s-sub"><span><span class="s-lbl">Colour:</span> ' + hl(d.colour, q) + '</span></div>'
+        + '<div class="s-claim"><span class="s-lbl">Claim:</span> ' + hl(d.claim, q) + ' | <span class="s-lbl">Invoice:</span> ' + hl(d.invoice, q) + ' | ' + hl(d.insurer, q) + '</div>'
+        + '</div></div>';
+    }
+    function poRow(d, q) {
+      return '<div class="s-result">' + carBox(d, q)
+        + '<div class="s-info">'
+        + '<div class="s-top"><span class="s-quote">' + hl(d.po, q) + '</span><span class="s-lbl" style="font-size:11px">Quote: <span style="color:#fff">' + hl(d.quote, q) + '</span></span></div>'
+        + '<div class="s-name">' + hl(d.name, q) + '</div>'
+        + '<div class="s-sub"><span><span class="s-lbl">Supplier:</span> ' + hl(d.supplier, q) + '</span><span><span class="s-lbl">Amount:</span> ' + hl(d.amount, q) + '</span></div>'
+        + '</div></div>';
+    }
+    function invRow(d, q) {
+      return '<div class="s-result" onclick="document.getElementById(\'topSearch\').value=\'\';document.getElementById(\'searchDropdown\').classList.remove(\'open\');switchTab(\'invoice\')" style="cursor:pointer">'
+        + carBox(d, q)
+        + '<div class="s-info">'
+        + '<div class="s-top"><span class="s-quote">' + hl(d.invoice, q) + '</span><span class="s-lbl" style="font-size:11px">Quote: <span style="color:#fff">' + hl(d.quote, q) + '</span></span></div>'
+        + '<div class="s-name">' + hl(d.name, q) + '</div>'
+        + '<div class="s-sub"><span><span class="s-lbl">Customer:</span> ' + hl(d.customer, q) + '</span></div>'
+        + '<div class="s-claim"><span class="s-lbl">Date:</span> ' + hl(d.date, q) + '</div>'
+        + '</div></div>';
+    }
+
+    var searchInput   = $('topSearch');
+    var searchDropdown = $('searchDropdown');
+    var searchResults  = $('searchResults');
+    var sEmpty         = $('sEmpty');
+
+    function doSearch(q) {
+      if (!q) { searchDropdown.classList.remove('open'); return; }
+      var ql  = q.toLowerCase();
+      var qH  = filterCat(SD.quotes,   ['reg','name','quote','invoice','claim','customer','phone','colour','insurer'], ql);
+      var poH = filterCat(SD.pos,      ['reg','name','po','quote','supplier','amount'], ql);
+      var iH  = filterCat(SD.invoices, ['reg','name','invoice','quote','date','customer'], ql);
+      var html = '';
+      if (qH.length)  html += catHdr('Quotes',          'request_quote') + qH.map(function(d)  { return qRow(d, q); }).join('');
+      if (poH.length) html += catHdr('Purchase Orders', 'shopping_cart') + poH.map(function(d) { return poRow(d, q); }).join('');
+      if (iH.length)  html += catHdr('Invoices',        'receipt')       + iH.map(function(d)  { return invRow(d, q); }).join('');
+      searchResults.innerHTML = html;
+      sEmpty.style.display = html ? 'none' : 'block';
+      searchDropdown.classList.add('open');
+    }
+
+    searchInput.addEventListener('input', function () { doSearch(this.value.trim()); });
+    searchInput.addEventListener('focus', function () { if (this.value.trim()) doSearch(this.value.trim()); });
+    document.addEventListener('click', function (e) {
+      if (!document.querySelector('.search-wrap').contains(e.target)) searchDropdown.classList.remove('open');
+    });
+
+  });
+}());
+</script>
+</body>
+</html>
