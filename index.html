@@ -65,7 +65,7 @@
     .s-empty { padding: 20px; text-align: center; color: #6b7280; font-size: 13px; }
 
     /* ── Job nav box / second bar ── */
-    .job-nav-box { background: #2b333b; margin: 8px 12px; border-radius: 2px; overflow: hidden; }
+    .job-nav-box { background: #2b333b; margin: 12px 12px 0; border-radius: 2px; overflow: hidden; }
     .secondbar { background: transparent; border-bottom: 1px solid #374151; padding: 0 16px; height: 48px; display: flex; align-items: center; gap: 10px; }
     .job-id { color: #fff; font-size: 18px; font-weight: 700; }
     .badge-closed { background: #f59e0b; color: #000; font-size: 13px; font-weight: 700; padding: 2px 10px; border-radius: 3px; display: flex; align-items: center; gap: 3px; }
@@ -87,7 +87,7 @@
     .tab .sym { font-size: 20px; }
 
     /* ── Header view (4-column grid) ── */
-    .main { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; padding: 12px; width: 100%; box-sizing: border-box; height: calc(100vh - 48px - 48px - 42px - 16px); }
+    .main { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; padding: 12px; width: 100%; box-sizing: border-box; height: calc(100vh - 48px - 48px - 42px - 12px); }
     @media (max-width:1200px) { .main { grid-template-columns: repeat(2,1fr); } }
     @media (max-width:700px)  { .main { grid-template-columns: 1fr; } }
 
@@ -147,7 +147,7 @@
     .icon-btn-danger  { background: #ef4444; }
 
     /* ── Shared view (Images / Invoice) ── */
-    .view { display: none; padding: 16px; height: calc(100vh - 48px - 48px - 42px - 16px); overflow-y: auto; }
+    .view { display: none; padding: 16px; height: calc(100vh - 48px - 48px - 42px - 12px); overflow-y: auto; }
 
     /* ── Images view ── */
     .view-header  { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
