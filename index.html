@@ -11,21 +11,31 @@
     body { font-family: 'Open Sans', Arial, sans-serif; background: #16191d; color: #ccc; font-size: 16px; }
     .sym { font-family: 'Material Symbols Rounded'; font-style: normal; font-weight: 300; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; -webkit-font-smoothing: antialiased; display: inline-block; vertical-align: middle; }
     input, select { font-family: 'Open Sans', Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; color: #fff; background: #2b333b; border: 1px solid #4c5967; border-radius: 6px; padding: 6px 10px; width: 100%; outline: none; margin-bottom: 16px; }
+    select { appearance: none; -webkit-appearance: none; padding-right: 32px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; }
     input::placeholder { color: #4c5967; opacity: 1; }
     input:focus, select:focus { border-color: #4a9eff; }
     select option { background: #2b333b; color: #fff; }
     label { display: block; color: #fff; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
 
+    /* ── Shared label / text ── */
+    .bar-label { color: #9ca3af; font-size: 14px; font-weight: 400; }
+    .muted-label { color: #9ca3af; font-size: 13px; }
+    .req { color: #ef4444; }
+    .mb-16 { margin-bottom: 16px; }
+
+    /* ── Top nav ── */
     .topnav { background: #2b333b; border-bottom: 1px solid #333; padding: 0 16px; height: 48px; display: flex; align-items: center; }
     .topnav-left { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
     .topnav-center { display: flex; align-items: center; flex: 1; justify-content: center; }
     .topnav-icons { display: flex; align-items: center; gap: 16px; flex-shrink: 0; margin-left: auto; }
     .logo { color: #3b82f6; font-weight: 700; font-size: 15px; margin-right: 10px; display: flex; align-items: center; gap: 4px; }
     .logo span { color: #fff; }
-    .nav-btn { background: none; border: none; color: #aaa; padding: 5px 10px; cursor: pointer; font-size: 16px; border-radius: 3px; display: flex; align-items: center; gap: 3px; font-family: 'Open Sans', Arial, sans-serif; }
+    .nav-btn { background: none; border: none; color: #9ca3af; padding: 5px 10px; cursor: pointer; font-size: 16px; border-radius: 3px; display: flex; align-items: center; gap: 3px; font-family: 'Open Sans', Arial, sans-serif; }
     .nav-btn:hover { background: #222; color: #fff; }
+    .nav-icon { font-size: 20px; color: #6b7280; }
     .time { color: #fff; font-weight: 600; font-size: 14px; }
 
+    /* ── Search ── */
     .search-wrap { position: relative; }
     .search-box { display: flex; align-items: center; background: #2b333b; border: 1px solid #4c5967; border-radius: 6px; height: 36px; padding: 0 10px; gap: 6px; }
     .search-box:focus-within { border-color: #4a9eff; }
@@ -37,7 +47,7 @@
     .search-dropdown.open { display: block; }
     .search-dropdown::-webkit-scrollbar { width: 6px; }
     .search-dropdown::-webkit-scrollbar-track { background: #374151; }
-    .search-dropdown::-webkit-scrollbar-thumb { background: #627384; border-radius: 3px; }
+    .search-dropdown::-webkit-scrollbar-thumb { background: #6b7280; border-radius: 3px; }
     .s-cat-hdr { padding: 10px 16px 6px; background: #16191d; display: flex; align-items: center; gap: 8px; position: sticky; top: 0; z-index: 1; }
     .s-result { display: flex; align-items: stretch; gap: 14px; padding: 12px 16px; border-bottom: 1px solid #374151; cursor: pointer; }
     .s-result:last-child { border-bottom: none; }
@@ -50,35 +60,38 @@
     .s-quote { color: #9ca3af; font-size: 12px; font-weight: 600; }
     .s-name { color: #fff; font-size: 14px; font-weight: 600; }
     .s-sub { color: #fff; font-size: 12px; display: flex; gap: 12px; }
-    .s-lbl { color: #9ca3af; }
+    .s-lbl { color: #6b7280; }
     .s-claim { color: #fff; font-size: 11px; }
-    .s-empty { padding: 20px; text-align: center; color: #627384; font-size: 13px; }
+    .s-empty { padding: 20px; text-align: center; color: #6b7280; font-size: 13px; }
 
-    .secondbar { background: #16191d; border-bottom: 1px solid #333; padding: 0 16px; height: 48px; display: flex; align-items: center; gap: 10px; }
+    /* ── Job nav box / second bar ── */
+    .job-nav-box { background: #2b333b; margin: 8px 12px; border-radius: 2px; overflow: hidden; }
+    .secondbar { background: transparent; border-bottom: 1px solid #374151; padding: 0 16px; height: 48px; display: flex; align-items: center; gap: 10px; }
     .job-id { color: #fff; font-size: 18px; font-weight: 700; }
     .badge-closed { background: #f59e0b; color: #000; font-size: 13px; font-weight: 700; padding: 2px 10px; border-radius: 3px; display: flex; align-items: center; gap: 3px; }
     .badge-main { background: #3b82f6; color: #fff; font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
-    .sep { color: #444; }
-    .info-item { display: flex; align-items: center; gap: 4px; color: #aaa; font-size: 16px; }
-    .total-label { color: #6b7280; font-size: 16px; }
+    .sep { color: #6b7280; }
+    .info-item { display: flex; align-items: center; gap: 4px; color: #9ca3af; font-size: 14px; font-weight: 400; }
     .total-val { color: #f59e0b; font-weight: 700; font-size: 16px; }
     .total-val2 { color: #10b981; font-weight: 700; font-size: 16px; }
     .ml-auto { margin-left: auto; }
     .btn-save { background: #3b82f6; color: #fff; font-size: 14px; padding: 6px 16px; border-radius: 3px; border: none; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 4px; font-family: 'Open Sans', Arial, sans-serif; }
-    .btn-back { background: #374151; color: #ccc; font-size: 14px; padding: 6px 14px; border-radius: 3px; border: none; cursor: pointer; display: flex; align-items: center; gap: 3px; font-family: 'Open Sans', Arial, sans-serif; }
-    .btn-more { background: #374151; color: #ccc; padding: 4px 8px; border-radius: 3px; border: none; cursor: pointer; display: flex; align-items: center; }
-    .quote-label { color: #6b7280; font-size: 16px; }
+    .btn-back { background: #374151; color: #9ca3af; font-size: 14px; padding: 6px 14px; border-radius: 3px; border: none; cursor: pointer; display: flex; align-items: center; gap: 3px; font-family: 'Open Sans', Arial, sans-serif; }
+    .btn-more { background: #374151; color: #9ca3af; padding: 4px 8px; border-radius: 3px; border: none; cursor: pointer; display: flex; align-items: center; }
 
-    .tabbar { background: #16191d; border-bottom: 1px solid #333; padding: 0 12px; display: flex; align-items: center; overflow-x: auto; }
+    /* ── Tab bar ── */
+    .tabbar { background: transparent; border-bottom: none; padding: 0 4px; display: flex; align-items: center; overflow-x: auto; }
     .tab { padding: 9px 12px; color: #9ca3af; font-size: 16px; font-weight: 400; cursor: pointer; border-bottom: 2px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
     .tab:hover { color: #fff; }
     .tab.active { color: #3b82f6; border-bottom: 2px solid #3b82f6; }
     .tab .sym { font-size: 20px; }
 
-    .main { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; padding: 12px; width: 100%; box-sizing: border-box; height: calc(100vh - 48px - 48px - 42px); }
+    /* ── Header view (4-column grid) ── */
+    .main { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; padding: 12px; width: 100%; box-sizing: border-box; height: calc(100vh - 48px - 48px - 42px - 16px); }
     @media (max-width:1200px) { .main { grid-template-columns: repeat(2,1fr); } }
     @media (max-width:700px)  { .main { grid-template-columns: 1fr; } }
 
+    /* ── Panels ── */
     .panel { background: #2b333b; border: none; border-radius: 5px; padding: 12px; height: 100%; overflow-y: auto; }
     .panel-title { color: #e5e7eb; font-weight: 700; font-size: 24px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #374151; padding-bottom: 8px; }
     .ntar-badge { background: #1d4ed8; color: #93c5fd; font-size: 9px; padding: 2px 6px; border-radius: 2px; font-weight: 600; }
@@ -92,6 +105,7 @@
     .add-circle { background: #374151; border: none; color: #9ca3af; width: 22px; height: 22px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .phone-row { display: flex; gap: 4px; align-items: center; margin-bottom: 16px; }
     .phone-row input, .phone-row select { margin-bottom: 0; }
+    .phone-row select { width: 60px; }
     .star-btn, .del-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; }
     .alt-contact { color: #3b82f6; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 3px; margin-bottom: 8px; }
     .radio-group { display: flex; gap: 8px; align-items: center; }
@@ -105,7 +119,7 @@
     .toggle-row { display: flex; align-items: center; gap: 6px; padding-top: 4px; }
     .toggle { width: 32px; height: 16px; background: #374151; border-radius: 8px; position: relative; cursor: pointer; border: none; flex-shrink: 0; }
     .toggle::after { content: ''; position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; background: #6b7280; border-radius: 50%; }
-    .date-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 4px; }
+    .date-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
     .date-field { position: relative; }
     .date-field input { padding-left: 26px; margin-bottom: 0; }
     .date-icon { position: absolute; left: 6px; top: 50%; transform: translateY(-50%); color: #6b7280; font-family: 'Material Symbols Rounded'; font-size: 14px; pointer-events: none; line-height: 1; font-style: normal; }
@@ -114,14 +128,82 @@
     .yes-no input[type="radio"] { width: auto; margin-bottom: 0; }
     .clear-btn { background: none; border: none; color: #6b7280; cursor: pointer; display: flex; align-items: center; flex-shrink: 0; }
 
-    /* Modal */
+    /* ── Vehicle panel helpers ── */
+    .addr-row { display: flex; gap: 4px; }
+    .addr-row select { width: 60px; margin-bottom: 0; }
+    .build-date-row { display: flex; gap: 3px; }
+    .build-date-sel { width: 58px; padding: 6px 22px 6px 6px; margin-bottom: 16px; background-position: right 4px center; }
+    .build-date-yr { width: 62px; min-width: 0; flex-shrink: 0; }
+
+    /* ── Key Dates helpers ── */
+    .section-hdr { display: flex; justify-content: space-between; align-items: center; }
+    .date-with-clear { display: flex; align-items: center; gap: 3px; }
+    .date-with-clear > .date-field { flex: 1; }
+
+    /* ── Icon buttons ── */
+    .icon-btn { background: #374151; border: none; border-radius: 4px; width: 34px; height: 34px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .icon-btn-sm { width: 32px; height: 32px; }
+    .icon-btn-primary { background: #3b82f6; }
+    .icon-btn-danger  { background: #ef4444; }
+
+    /* ── Shared view (Images / Invoice) ── */
+    .view { display: none; padding: 16px; height: calc(100vh - 48px - 48px - 42px - 16px); overflow-y: auto; }
+
+    /* ── Images view ── */
+    .view-header  { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
+    .view-title   { color: #e5e7eb; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .view-subtitle { color: #9ca3af; font-size: 13px; }
+    .view-actions { display: flex; align-items: center; gap: 8px; }
+
+    /* ── Invoice view ── */
+    .invoice-layout      { display: grid; grid-template-columns: 1fr 400px; gap: 12px; }
+    .invoice-section     { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #374151; }
+    .invoice-field-label { color: #fff; font-size: 16px; padding-top: 4px; }
+    .invoice-grid-2      { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .invoice-grid-2-wide { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #374151; }
+    .total-summary       { border-top: 1px solid #374151; padding-top: 16px; margin-bottom: 24px; }
+    .total-summary-inner { width: 320px; margin-left: auto; }
+    .total-row       { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .total-row-final { display: flex; justify-content: space-between; border-top: 1px solid #374151; padding-top: 10px; }
+    .total-row-lbl   { color: #9ca3af; font-size: 13px; }
+    .chk-label-row   { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+    .chk-label-row input[type="checkbox"] { width: 16px; height: 16px; margin: 0; accent-color: #3b82f6; }
+    .chk-label-row label { color: #9ca3af; font-size: 14px; font-weight: 400; margin: 0; }
+    .inline-radio-label { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .inline-radio-label input[type="radio"] { width: auto; margin: 0; }
+
+    /* ── Percentage input group ── */
+    .pct-input-group { display: flex; }
+    .pct-input-group input { text-align: right; margin-bottom: 0; width: 65px; border-radius: 6px 0 0 6px; border-right: none; }
+    .field-suffix { background: #374151; border: 1px solid #4c5967; border-left: none; color: #9ca3af; padding: 6px 8px; border-radius: 0 6px 6px 0; font-size: 13px; line-height: 24px; }
+
+    /* ── Modal shared ── */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 9999; align-items: center; justify-content: center; }
     .modal-overlay.open { display: flex; }
+    .modal-box  { background: #2b333b; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+    .modal-hdr  { display: flex; align-items: center; gap: 10px; padding: 16px 20px; border-bottom: 1px solid #374151; }
+    .modal-hdr-title { color: #e5e7eb; font-weight: 700; font-size: 16px; }
+    .modal-ftr  { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 20px; border-top: 1px solid #374151; }
+    .modal-ftr-note { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #9ca3af; margin-right: auto; font-style: italic; }
+    .modal-body { padding: 24px 28px; }
+    .modal-cols { display: grid; grid-template-columns: 1fr 1fr; }
+    .modal-col-border { border-right: 1px solid #374151; }
+    .modal-section-title { font-weight: 700; color: #e5e7eb; font-size: 15px; margin-bottom: 14px; }
+    .modal-section-sub   { font-weight: 700; color: #e5e7eb; font-size: 13px; margin-bottom: 14px; }
+
+    /* ── Modal action buttons ── */
+    .act-btn { border: none; border-radius: 4px; padding: 7px 20px; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; font-family: 'Open Sans', Arial, sans-serif; }
+    .act-btn-green { background: #22c55e; color: #fff; }
+    .act-btn-blue  { background: #3b82f6; color: #fff; padding: 7px 14px; }
+    .act-btn-grey  { background: #4b5563; color: #e5e7eb; }
+
+    /* ── Misc modal helpers ── */
     .chk-row { display: flex; align-items: center; gap: 8px; }
     .chk-row input[type="checkbox"], .chk-row input[type="radio"] { width: 16px; height: 16px; accent-color: #3b82f6; cursor: pointer; flex-shrink: 0; margin: 0; }
     .chk-row label { color: #e5e7eb; font-size: 13px; cursor: pointer; margin: 0; font-weight: 400; }
     .divider { border: none; border-top: 1px solid #4a5568; margin: 12px 0; }
-    /* Attach Images Modal */
+
+    /* ── Attach Images Modal ── */
     .ai-cat-section { margin-bottom: 0; }
     .ai-cat-heading { font-weight: 700; color: #e5e7eb; font-size: 14px; margin-bottom: 2px; }
     .ai-cat-subtitle { color: #9ca3af; font-size: 12px; margin-bottom: 10px; }
@@ -144,12 +226,12 @@
 <nav class="topnav">
   <div class="topnav-left">
     <div class="logo"><span class="sym" style="color:#3b82f6;font-size:18px">check_circle</span><span>FLEXIQUOTE</span></div>
-    <button class="nav-btn">Quote <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
-    <button class="nav-btn">Debtor <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
-    <button class="nav-btn">Creditor <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
-    <button class="nav-btn">Reports <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
-    <button class="nav-btn">Tables <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
-    <button class="nav-btn">Admin <span class="sym" style="font-size:14px;color:#666">expand_more</span></button>
+    <button class="nav-btn">Quote <span class="sym nav-icon" style="font-size:14px">expand_more</span></button>
+    <button class="nav-btn">Debtor <span class="sym nav-icon" style="font-size:14px">expand_more</span></button>
+    <button class="nav-btn">Creditor <span class="sym nav-icon" style="font-size:14px">expand_more</span></button>
+    <button class="nav-btn">Reports <span class="sym nav-icon" style="font-size:14px">expand_more</span></button>
+    <button class="nav-btn">Tables <span class="sym nav-icon" style="font-size:14px">expand_more</span></button>
+    <button class="nav-btn">Admin <span class="sym nav-icon" style="font-size:14px">expand_more</span></button>
   </div>
   <div class="topnav-center">
     <div class="search-wrap">
@@ -164,26 +246,29 @@
     </div>
   </div>
   <div class="topnav-icons">
-    <span class="sym" style="font-size:20px;color:#6b7280">dark_mode</span>
-    <span class="sym" style="font-size:20px;color:#6b7280">notifications</span>
+    <span class="sym nav-icon">dark_mode</span>
+    <span class="sym nav-icon">notifications</span>
     <span class="time">2:16 PM</span>
-    <span style="font-size:13px;color:#9ca3af">PartsCheck</span>
+    <span class="bar-label" style="font-size:13px">PartsCheck</span>
   </div>
 </nav>
+
+<!-- JOB + NAV BOX -->
+<div class="job-nav-box">
 
 <!-- SECOND BAR -->
 <div class="secondbar">
   <span class="job-id">27632</span>
   <div class="badge-closed">Closed <span class="sym" style="font-size:14px">expand_more</span></div>
-  <span class="sep">|</span><span class="quote-label">Quote:</span>
+  <span class="sep">|</span><span class="bar-label">Quote:</span>
   <span class="badge-main">Main</span>
   <span class="sep">|</span>
   <div class="info-item"><span class="sym" style="font-size:20px">person</span> Pwa User, Test0</div>
   <span class="sep">|</span>
   <div class="info-item"><span class="sym" style="font-size:20px">directions_car</span> TEST3003 - FORD F...</div>
   <span class="sep">|</span>
-  <span class="total-label">Total (Ex GST)</span>&nbsp;<span class="total-val">$468.00</span>&nbsp;
-  <span class="total-label">Total (Inc GST)</span>&nbsp;<span class="total-val2">$514.80</span>
+  <span class="bar-label">Total (Ex GST)</span>&nbsp;<span class="total-val">$468.00</span>&nbsp;
+  <span class="bar-label">Total (Inc GST)</span>&nbsp;<span class="total-val2">$514.80</span>
   <div class="ml-auto" style="display:flex;gap:6px;align-items:center">
     <button class="btn-save"><span class="sym" style="font-size:18px">save</span> Save</button>
     <button class="btn-back"><span class="sym" style="font-size:18px">arrow_back</span> Back</button>
@@ -208,113 +293,166 @@
   <div class="tab"><span class="sym">draw</span> Annotations</div>
 </div>
 
+</div><!-- /job-nav-box -->
+
 <!-- HEADER VIEW -->
 <div class="main" id="headerView">
+
+  <!-- Vehicle panel -->
   <div class="panel">
     <div class="panel-title"><span class="sym" style="font-size:24px">directions_car</span> Vehicle <span class="ntar-badge">NTAR Hours On - F633</span><span class="key-badge" style="margin-left:auto">Key No. 0000</span></div>
     <div style="display:flex;gap:6px;align-items:flex-end">
-      <div class="form-group" style="flex:1"><label>Registration No. <span style="color:#ef4444">*</span></label><input value="TEST3003"></div>
+      <div class="form-group" style="flex:1"><label>Registration No. <span class="req">*</span></label><input value="TEST3003"></div>
       <div class="form-group" style="width:90px"><label>State</label><select><option>NSW</option><option>VIC</option><option>QLD</option></select></div>
       <button class="rego-btn"><span class="sym" style="font-size:16px">search</span> Rego Lookup</button>
     </div>
-    <div><label>Make / Model <span style="color:#ef4444">*</span></label>
-      <div style="display:flex;gap:4px;align-items:center"><input value="FORD FALCON XE GL" style="flex:1"><button class="add-btn"><span class="sym" style="font-size:16px">add</span></button><button class="schedules-btn"><span class="sym" style="font-size:14px">calendar_month</span> Schedules</button></div>
+    <div class="mb-16">
+      <label>Make / Model <span class="req">*</span></label>
+      <div style="display:flex;gap:4px;align-items:center"><input value="FORD FALCON XE GL" style="flex:1;margin-bottom:0"><button class="add-btn"><span class="sym" style="font-size:16px">add</span></button><button class="schedules-btn"><span class="sym" style="font-size:14px">calendar_month</span> Schedules</button></div>
     </div>
-    <div class="form-row g2"><div class="form-group"><label>Body Style <span style="color:#ef4444">*</span></label><select><option>4 DOOR</option></select></div><div class="form-group"><label>Body Style 2</label><select><option>4wd4Door</option></select></div></div>
-    <div class="form-row g2"><div class="form-group"><label>Paint Group <span style="color:#ef4444">*</span></label><select><option>Metallic 1</option></select></div><div class="form-group"><label>Build Date</label><div style="display:flex;gap:3px"><select style="width:46px;margin-bottom:16px"><option>01</option></select><select style="width:46px;margin-bottom:16px"><option>▼</option></select><input value="1982"></div></div></div>
+    <div class="form-row g2">
+      <div class="form-group"><label>Body Style <span class="req">*</span></label><select><option>4 DOOR</option></select></div>
+      <div class="form-group"><label>Body Style 2</label><select><option>4wd4Door</option></select></div>
+    </div>
+    <div class="form-row g2">
+      <div class="form-group"><label>Paint Group <span class="req">*</span></label><select><option>Metallic 1</option></select></div>
+      <div class="form-group">
+        <label>Build Date</label>
+        <div class="build-date-row">
+          <select class="build-date-sel"><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option><option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select>
+          <select class="build-date-sel"><option>Jan</option><option>Feb</option><option>Mar</option><option>Apr</option><option>May</option><option>Jun</option><option>Jul</option><option>Aug</option><option>Sep</option><option>Oct</option><option>Nov</option><option>Dec</option></select>
+          <input value="1982" class="build-date-yr">
+        </div>
+      </div>
+    </div>
     <div class="form-row g2"><div class="form-group"><label>Transmission</label><select><option>Automatic</option></select></div><div class="form-group"><label>Colour</label><input value="Cream"></div></div>
     <div class="form-row g2"><div class="form-group"><label>VIN</label><input value="JTMHV01J704264675"></div><div class="form-group"><label>Engine No.</label><input value="v8"></div></div>
     <div class="form-group"><label>Odometer</label><input value="0"></div>
     <div class="form-row g2"><div class="form-group"><label>Cylinders</label><input placeholder="e.g. 6"></div><div class="form-group"><label>Engine Size</label><input placeholder="e.g. 1300"></div></div>
     <div class="form-row g2"><div class="form-group"><label>Trim Code</label><input></div><div class="form-group"><label>Paint Code</label><input></div></div>
   </div>
+
+  <!-- Customer panel -->
   <div class="panel">
     <div class="panel-title" style="justify-content:space-between"><span style="display:flex;align-items:center;gap:6px"><span class="sym" style="font-size:24px">person</span> Customer</span><div class="radio-group"><label><input type="radio" name="ctype"> Company</label><label><input type="radio" name="ctype" checked> Person</label></div></div>
-    <div class="form-row g2"><div class="form-group"><label>First Name <span style="color:#ef4444">*</span></label><input value="Test0"></div><div class="form-group"><label>Last Name <span style="color:#ef4444">*</span></label><input value="Pwa User"></div></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="color:#aaa;font-size:13px">Emails</span><button class="add-circle"><span class="sym" style="font-size:14px">add</span></button></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="color:#aaa;font-size:13px">Phones</span><button class="add-circle"><span class="sym" style="font-size:14px">add</span></button></div>
-    <div class="phone-row"><select style="width:60px"><option>M</option><option>H</option><option>W</option></select><input value="856505659" style="flex:1;margin-bottom:0"><button class="star-btn"><span class="sym" style="color:#f59e0b;font-size:18px">star</span></button><button class="del-btn"><span class="sym" style="color:#ef4444;font-size:18px">remove_circle</span></button></div>
+    <div class="form-row g2">
+      <div class="form-group"><label>First Name <span class="req">*</span></label><input value="Test0"></div>
+      <div class="form-group"><label>Last Name <span class="req">*</span></label><input value="Pwa User"></div>
+    </div>
+    <div class="section-hdr" style="margin-bottom:8px"><span class="muted-label">Emails</span><button class="add-circle"><span class="sym" style="font-size:14px">add</span></button></div>
+    <div class="section-hdr" style="margin-bottom:6px"><span class="muted-label">Phones</span><button class="add-circle"><span class="sym" style="font-size:14px">add</span></button></div>
+    <div class="phone-row"><select><option>M</option><option>H</option><option>W</option></select><input value="856505659" style="flex:1;margin-bottom:0"><button class="star-btn"><span class="sym" style="color:#f59e0b;font-size:18px">star</span></button><button class="del-btn"><span class="sym" style="color:#ef4444;font-size:18px">remove_circle</span></button></div>
     <div class="alt-contact"><span class="sym" style="font-size:14px">add</span> Alternative Customer Contact</div>
-    <div><label>Address</label><div style="display:flex;gap:4px"><select style="width:50px"><option>H</option></select><input placeholder="Start typing address" style="flex:1"></div></div>
+    <div><label>Address</label><div class="addr-row"><select><option>H</option></select><input placeholder="Start typing address" style="flex:1"></div></div>
     <div class="form-group"><label>Suburb</label><input placeholder="Suburb"></div>
     <div class="form-group"><label>State</label><input placeholder="State"></div>
     <div class="form-row g2"><div class="form-group"><label>Postal code</label><input placeholder="Postal code"></div><div class="form-group"><label>Country</label><input placeholder="Country"></div></div>
   </div>
+
+  <!-- Insurer/Debtor panel -->
   <div class="panel">
     <div class="panel-title"><span class="sym" style="font-size:24px">shield</span> Insurer/Debtor</div>
-    <div class="form-group"><label>Insurer <span style="color:#ef4444">*</span></label><select><option>Insurance Australia Limited</option></select></div>
-    <div class="form-group"><label>ABN</label><div style="display:flex;gap:4px;align-items:center"><input value="11 000 016 722" style="flex:1"><span class="sym" style="color:#22c55e;font-size:20px">check_circle</span></div></div>
+    <div class="form-group"><label>Insurer <span class="req">*</span></label><select><option>Insurance Australia Limited</option></select></div>
+    <div class="form-group mb-16"><label>ABN</label><div style="display:flex;gap:4px;align-items:center"><input value="11 000 016 722" style="flex:1"><span class="sym" style="color:#22c55e;font-size:20px">check_circle</span></div></div>
     <div class="form-row g2"><div class="form-group"><label>Claim Number</label><input value="CL00014"></div><div class="form-group"><label>Policy Number</label><input placeholder="Policy No."></div></div>
     <div class="form-row g2"><div class="form-group"><label>Labour Times</label><select><option>NTAR</option><option>MOTOR</option></select></div><div class="form-group"><label>Method</label><div class="method-toggle"><button class="method-btn active"><span class="sym" style="font-size:14px">schedule</span> Hours</button><button class="method-btn"><span class="sym" style="font-size:14px">attach_money</span> Dollars</button></div></div></div>
     <div class="form-row g2"><div><div class="includes-gst"><span>Excess</span><input type="radio" name="gst" style="width:auto;margin:0 4px"><span>Includes GST</span></div><input value="0.00"></div><div class="form-group"><label>Owners Contribution</label><input value="0.00"></div></div>
     <div class="form-group"><label>Discount On Invoice</label><input value="$ 0.00"></div>
     <div class="form-row g2"><div class="form-group"><label>Assessor</label><input placeholder="Assessor"></div><div class="form-group"><label>Phone Number</label><input placeholder="xxxxxxxxx"></div></div>
     <div class="form-group"><label>Estimator</label><input placeholder="Quoter"></div>
-    <div class="form-group"><label>Is Towed</label><div class="toggle-row"><button class="toggle"></button><span style="color:#9ca3af">No</span></div></div>
+    <div class="form-group"><label>Is Towed</label><div class="toggle-row"><button class="toggle"></button><span class="bar-label">No</span></div></div>
   </div>
+
+  <!-- Key Dates panel -->
   <div class="panel">
     <div class="panel-title"><span class="sym" style="font-size:24px">calendar_today</span> Key Dates</div>
-    <div class="form-group"><label>Request for Quote Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input value="11/03/2026"></div></div>
-    <div class="date-grid"><div class="form-group"><label>Inspection Booking</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Inspection Start Date"></div></div><div class="form-group"><label>Booking Attended</label><div style="color:#9ca3af;padding-top:6px;font-size:13px">No</div></div></div>
-    <div class="date-grid"><div class="form-group"><label>Sent for Authority</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Sent for Assessment"></div></div><div class="form-group"><label>Authority Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Authority Date"></div></div></div>
-    <div class="date-grid"><div class="form-group"><label>Refuse Book Repair Reason</label><input></div><div class="form-group"><label>Is Repair Booked</label><div class="yes-no"><label><input type="radio" name="repair"> Yes</label><label><input type="radio" name="repair" checked> No</label></div></div></div>
-    <div class="date-grid"><div class="form-group"><label>Estimated Start Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Job Start Date"></div></div><div class="form-group"><label>Estimated End Date</label><div style="display:flex;align-items:center;gap:3px"><div class="date-field" style="flex:1"><span class="date-icon">calendar_month</span><input placeholder="Job End Date"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div></div>
-    <div class="date-grid"><div class="form-group"><label>Vehicle Arrived</label><div style="display:flex;align-items:center;gap:3px"><div class="date-field" style="flex:1"><span class="date-icon">calendar_month</span><input placeholder="Arrive for Repair Date"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div><div class="form-group"><label>Vehicle On Site</label><div class="toggle-row"><button class="toggle"></button><span style="color:#9ca3af">No</span></div></div></div>
-    <div class="date-grid"><div class="form-group"><label>Job Start Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Job Start"></div></div><div class="form-group"><label>Job Completed Date</label><div style="display:flex;align-items:center;gap:3px"><div class="date-field" style="flex:1"><span class="date-icon">calendar_month</span><input placeholder="Job Completion"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div></div>
-    <div class="date-grid"><div class="form-group"><label>Vehicle Picked Up</label><div style="display:flex;align-items:center;gap:3px"><div class="date-field" style="flex:1"><span class="date-icon">calendar_month</span><input placeholder="Vehicle Departed Date"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div><div class="form-group"><label>Vehicle Departed</label><div class="toggle-row"><button class="toggle"></button><span style="color:#9ca3af">No</span></div></div></div>
+    <div class="form-group mb-16"><label>Request for Quote Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input value="11/03/2026"></div></div>
+    <div class="date-grid">
+      <div class="form-group"><label>Inspection Booking</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Inspection Start Date"></div></div>
+      <div class="form-group"><label>Booking Attended</label><div class="bar-label" style="padding-top:6px">No</div></div>
+    </div>
+    <div class="date-grid">
+      <div class="form-group"><label>Sent for Authority</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Sent for Assessment"></div></div>
+      <div class="form-group"><label>Authority Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Authority Date"></div></div>
+    </div>
+    <div class="date-grid">
+      <div class="form-group"><label>Refuse Book Repair Reason</label><input></div>
+      <div class="form-group"><label>Is Repair Booked</label><div class="yes-no"><label><input type="radio" name="repair"> Yes</label><label><input type="radio" name="repair" checked> No</label></div></div>
+    </div>
+    <div class="date-grid">
+      <div class="form-group"><label>Estimated Start Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Job Start Date"></div></div>
+      <div class="form-group"><label>Estimated End Date</label><div class="date-with-clear"><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Job End Date"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div>
+    </div>
+    <div class="date-grid">
+      <div class="form-group"><label>Vehicle Arrived</label><div class="date-with-clear"><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Arrive for Repair Date"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div>
+      <div class="form-group"><label>Vehicle On Site</label><div class="toggle-row"><button class="toggle"></button><span class="bar-label">No</span></div></div>
+    </div>
+    <div class="date-grid">
+      <div class="form-group"><label>Job Start Date</label><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Job Start"></div></div>
+      <div class="form-group"><label>Job Completed Date</label><div class="date-with-clear"><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Job Completion"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div>
+    </div>
+    <div class="date-grid">
+      <div class="form-group"><label>Vehicle Picked Up</label><div class="date-with-clear"><div class="date-field"><span class="date-icon">calendar_month</span><input placeholder="Vehicle Departed Date"></div><button class="clear-btn"><span class="sym" style="font-size:14px">close</span></button></div></div>
+      <div class="form-group"><label>Vehicle Departed</label><div class="toggle-row"><button class="toggle"></button><span class="bar-label">No</span></div></div>
+    </div>
   </div>
-</div>
+
+</div><!-- /headerView -->
 
 <!-- IMAGES VIEW -->
-<div id="imagesView" style="display:none;padding:16px;height:calc(100vh - 48px - 48px - 42px);overflow-y:auto">
-  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
-    <div><h2 style="color:#e5e7eb;font-size:22px;font-weight:700;margin-bottom:4px">Images</h2><p style="color:#9ca3af;font-size:13px">Manage quote images</p></div>
-    <div style="display:flex;align-items:center;gap:8px">
-      <button style="background:#374151;border:none;border-radius:4px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="sym" style="font-size:18px;color:#9ca3af">grid_view</span></button>
-      <button style="background:#374151;border:none;border-radius:4px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="sym" style="font-size:18px;color:#9ca3af">view_list</span></button>
-      <button style="background:#374151;border:none;border-radius:4px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="sym" style="font-size:18px;color:#9ca3af">refresh</span></button>
-      <button style="background:#374151;border:none;border-radius:4px;padding:0 14px;height:34px;cursor:pointer;display:flex;align-items:center;gap:6px;color:#e5e7eb;font-size:13px;font-family:'Open Sans',Arial,sans-serif"><span class="sym" style="font-size:16px;color:#3b82f6">add</span> Add Categories</button>
-      <button style="background:#3b82f6;border:none;border-radius:4px;padding:0 14px;height:34px;cursor:pointer;display:flex;align-items:center;gap:6px;color:#fff;font-size:13px;font-weight:600;font-family:'Open Sans',Arial,sans-serif"><span class="sym" style="font-size:16px">add</span> Add</button>
+<div id="imagesView" class="view">
+  <div class="view-header">
+    <div><h2 class="view-title">Images</h2><p class="view-subtitle">Manage quote images</p></div>
+    <div class="view-actions">
+      <button class="icon-btn"><span class="sym" style="font-size:18px;color:#9ca3af">grid_view</span></button>
+      <button class="icon-btn"><span class="sym" style="font-size:18px;color:#9ca3af">view_list</span></button>
+      <button class="icon-btn"><span class="sym" style="font-size:18px;color:#9ca3af">refresh</span></button>
+      <button class="icon-btn" style="width:auto;padding:0 14px;gap:6px;color:#e5e7eb;font-size:13px;font-family:'Open Sans',Arial,sans-serif"><span class="sym" style="font-size:16px;color:#3b82f6">add</span> Add Categories</button>
+      <button class="icon-btn icon-btn-primary" style="width:auto;padding:0 14px;gap:6px;color:#fff;font-size:13px;font-weight:600;font-family:'Open Sans',Arial,sans-serif"><span class="sym" style="font-size:16px">add</span> Add</button>
     </div>
   </div>
   <div id="imageCategoryList"></div>
 </div>
 
 <!-- INVOICE VIEW -->
-<div id="invoiceView" style="display:none;padding:12px;height:calc(100vh - 48px - 48px - 42px);overflow:auto">
-  <div style="display:grid;grid-template-columns:1fr 400px;gap:12px">
+<div id="invoiceView" class="view" style="padding:12px;overflow:auto">
+  <div class="invoice-layout">
     <div class="panel" style="height:auto">
       <div class="panel-title" style="justify-content:space-between">
         <span style="display:flex;align-items:center;gap:8px"><span class="sym" style="font-size:24px">receipt</span> Invoice</span>
         <div style="display:flex;gap:8px">
-          <button style="background:#3b82f6;border:none;border-radius:4px;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="sym" style="font-size:18px;color:#fff">edit</span></button>
-          <button style="background:#ef4444;border:none;border-radius:4px;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="sym" style="font-size:18px;color:#fff">delete</span></button>
+          <button class="icon-btn icon-btn-sm icon-btn-primary"><span class="sym" style="font-size:18px;color:#fff">edit</span></button>
+          <button class="icon-btn icon-btn-sm icon-btn-danger"><span class="sym" style="font-size:18px;color:#fff">delete</span></button>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #374151">
-        <div><label>Invoice No.</label><div style="color:#fff;font-size:16px;padding-top:4px">50195/1</div></div>
-        <div><label>Invoice Date</label><div style="color:#fff;font-size:16px;padding-top:4px">11/03/2026</div></div>
+      <div class="invoice-grid-2-wide">
+        <div><label>Invoice No.</label><div class="invoice-field-label">50195/1</div></div>
+        <div><label>Invoice Date</label><div class="invoice-field-label">11/03/2026</div></div>
       </div>
-      <div style="margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #374151"><label>Payer</label><div style="color:#fff;font-size:16px;padding-top:4px">Insurance Australia Limited</div></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
-        <div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><label style="margin:0">Excess</label><div style="display:flex;align-items:center;gap:4px;margin-left:auto"><input type="radio" name="excessGst" style="width:auto;margin:0"><span style="color:#9ca3af;font-size:12px">Excess with GST</span></div></div><input value="0.00" style="text-align:right"></div>
+      <div class="invoice-section"><label>Payer</label><div class="invoice-field-label">Insurance Australia Limited</div></div>
+      <div class="invoice-grid-2">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><label style="margin:0">Excess</label><div class="inline-radio-label"><input type="radio" name="excessGst"><span class="bar-label" style="font-size:12px">Excess with GST</span></div></div>
+          <input value="0.00" style="text-align:right">
+        </div>
         <div><label>Owner Contribution</label><input value="0.00" style="text-align:right"></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+      <div class="invoice-grid-2" style="margin-bottom:20px">
         <div><label>Discount</label><input value="0.00" style="text-align:right"></div>
-        <div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><label style="margin:0">GST</label><div style="display:flex;align-items:center;gap:4px"><span style="color:#9ca3af;font-size:12px">Fixed</span><input type="radio" name="gstFixed" style="width:auto;margin:0"></div></div><input value="46.80" style="text-align:right"></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:24px"><input type="checkbox" style="width:16px;height:16px;margin:0;accent-color:#3b82f6"><label style="color:#9ca3af;font-size:14px;font-weight:400;margin:0">Exported</label></div>
-      <div style="border-top:1px solid #374151;padding-top:16px;margin-bottom:24px">
-        <div style="display:flex;justify-content:flex-end">
-          <div style="width:320px">
-            <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="color:#9ca3af;font-size:13px">Total <span style="font-size:10px">(Ex GST)</span></span><span style="color:#10b981;font-weight:700;font-size:15px">$468.00</span></div>
-            <div style="display:flex;justify-content:space-between;margin-bottom:10px"><span style="color:#9ca3af;font-size:13px">GST</span><span style="color:#9ca3af;font-size:15px">+ $46.80</span></div>
-            <div style="display:flex;justify-content:space-between;border-top:1px solid #374151;padding-top:10px"><span style="color:#9ca3af;font-size:13px">Total Payable <span style="font-size:10px">(Inc GST)</span></span><span style="color:#10b981;font-weight:700;font-size:18px">$514.80</span></div>
-          </div>
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><label style="margin:0">GST</label><div class="inline-radio-label"><span class="bar-label" style="font-size:12px">Fixed</span><input type="radio" name="gstFixed"></div></div>
+          <input value="46.80" style="text-align:right">
         </div>
       </div>
-      <div style="display:flex;align-items:center;gap:8px"><input type="checkbox" style="width:16px;height:16px;margin:0;accent-color:#3b82f6"><label style="color:#9ca3af;font-size:14px;font-weight:400;margin:0">GST Invoice</label></div>
+      <div class="chk-label-row"><input type="checkbox"><label>Exported</label></div>
+      <div class="total-summary">
+        <div class="total-summary-inner">
+          <div class="total-row"><span class="total-row-lbl">Total <span style="font-size:10px">(Ex GST)</span></span><span style="color:#10b981;font-weight:700;font-size:15px">$468.00</span></div>
+          <div class="total-row"><span class="total-row-lbl">GST</span><span style="color:#9ca3af;font-size:15px">+ $46.80</span></div>
+          <div class="total-row-final"><span class="total-row-lbl">Total Payable <span style="font-size:10px">(Inc GST)</span></span><span style="color:#10b981;font-weight:700;font-size:18px">$514.80</span></div>
+        </div>
+      </div>
+      <div class="chk-label-row" style="margin-bottom:0"><input type="checkbox"><label>GST Invoice</label></div>
     </div>
     <div class="panel" style="height:auto">
       <div class="panel-title"><span class="sym" style="font-size:24px">edit_note</span> Remarks</div>
@@ -323,23 +461,23 @@
   </div>
 </div>
 
-<!-- PRINT MODAL — only one, properly inside the overlay -->
+<!-- PRINT MODAL -->
 <div class="modal-overlay" id="printModal">
-  <div style="background:#2b333b;border-radius:8px;width:900px;max-width:97vw;box-shadow:0 20px 60px rgba(0,0,0,0.8)">
-    <div style="display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid #374151">
+  <div class="modal-box" style="width:900px;max-width:97vw">
+    <div class="modal-hdr">
       <span class="sym" style="color:#3b82f6;font-size:22px">print</span>
-      <span style="color:#e5e7eb;font-weight:700;font-size:16px">Print Options</span>
+      <span class="modal-hdr-title">Print Options</span>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr">
+    <div class="modal-cols">
       <!-- LEFT -->
-      <div style="padding:24px 28px;border-right:1px solid #374151">
-        <div style="font-weight:700;color:#e5e7eb;font-size:15px;margin-bottom:14px">Select Quote</div>
+      <div class="modal-body modal-col-border">
+        <div class="modal-section-title">Select Quote</div>
         <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
           <div class="chk-row"><input type="checkbox" id="sqMain"><label for="sqMain">Main</label></div>
           <div class="chk-row"><input type="checkbox" id="sqSupp1" checked><label for="sqSupp1">Supp 1</label></div>
         </div>
         <hr class="divider">
-        <div style="font-weight:700;color:#e5e7eb;font-size:13px;margin-bottom:14px">Quote Report options</div>
+        <div class="modal-section-sub">Quote Report options</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
           <div class="chk-row"><input type="checkbox" id="chkHours"><label for="chkHours">Hours Dollar Quote</label></div>
           <div class="chk-row"><input type="checkbox" id="chkDollar"><label for="chkDollar">Dollar Only Quote</label></div>
@@ -360,24 +498,23 @@
         </div>
       </div>
       <!-- RIGHT -->
-      <div style="padding:24px 28px">
-        <div style="font-weight:700;color:#e5e7eb;font-size:15px;margin-bottom:14px">Select additional reports to print</div>
+      <div class="modal-body">
+        <div class="modal-section-title">Select additional reports to print</div>
         <div class="chk-row" style="margin-bottom:10px">
           <input type="checkbox" id="rJobCard" checked>
           <label for="rJobCard">Job Card</label>
         </div>
-
         <div id="jobCardOptions" style="margin-left:24px;margin-bottom:14px">
-          <div style="font-weight:700;color:#e5e7eb;font-size:13px;margin-bottom:10px">Job Card report options</div>
+          <div class="modal-section-sub">Job Card report options</div>
           <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
             <div class="chk-row"><input type="radio" name="jcHours" id="jcCategory"><label for="jcCategory">Category Target Hours</label></div>
             <div class="chk-row"><input type="radio" name="jcHours" id="jcIndividual" checked><label for="jcIndividual">Individual Item Hours</label></div>
             <div class="chk-row"><input type="radio" name="jcHours" id="jcNone"><label for="jcNone">Do not print Hours</label></div>
           </div>
           <div style="display:flex;gap:16px">
-            <div><label style="font-size:12px;font-weight:700;color:#e5e7eb;display:block;margin-bottom:4px">R &amp; R %</label><div style="display:flex"><input type="number" value="100" style="text-align:right;margin-bottom:0;width:65px;border-radius:6px 0 0 6px;border-right:none"><span style="background:#374151;border:1px solid #4c5967;border-left:none;color:#9ca3af;padding:6px 8px;border-radius:0 6px 6px 0;font-size:13px;line-height:24px">%</span></div></div>
-            <div><label style="font-size:12px;font-weight:700;color:#e5e7eb;display:block;margin-bottom:4px">Repair %</label><div style="display:flex"><input type="number" value="100" style="text-align:right;margin-bottom:0;width:65px;border-radius:6px 0 0 6px;border-right:none"><span style="background:#374151;border:1px solid #4c5967;border-left:none;color:#9ca3af;padding:6px 8px;border-radius:0 6px 6px 0;font-size:13px;line-height:24px">%</span></div></div>
-            <div><label style="font-size:12px;font-weight:700;color:#e5e7eb;display:block;margin-bottom:4px">Paint %</label><div style="display:flex"><input type="number" value="100" style="text-align:right;margin-bottom:0;width:65px;border-radius:6px 0 0 6px;border-right:none"><span style="background:#374151;border:1px solid #4c5967;border-left:none;color:#9ca3af;padding:6px 8px;border-radius:0 6px 6px 0;font-size:13px;line-height:24px">%</span></div></div>
+            <div><label style="font-size:12px;font-weight:700;color:#e5e7eb;display:block;margin-bottom:4px">R &amp; R %</label><div class="pct-input-group"><input type="number" value="100"><span class="field-suffix">%</span></div></div>
+            <div><label style="font-size:12px;font-weight:700;color:#e5e7eb;display:block;margin-bottom:4px">Repair %</label><div class="pct-input-group"><input type="number" value="100"><span class="field-suffix">%</span></div></div>
+            <div><label style="font-size:12px;font-weight:700;color:#e5e7eb;display:block;margin-bottom:4px">Paint %</label><div class="pct-input-group"><input type="number" value="100"><span class="field-suffix">%</span></div></div>
           </div>
         </div>
         <hr class="divider">
@@ -391,29 +528,29 @@
         </div>
       </div>
     </div>
-    <div style="display:flex;justify-content:flex-end;align-items:center;gap:8px;padding:14px 20px;border-top:1px solid #374151">
-      <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:#9ca3af;margin-right:auto;font-style:italic">
+    <div class="modal-ftr">
+      <div class="modal-ftr-note">
         <span class="sym" style="font-size:18px;color:#9ca3af;flex-shrink:0">info</span>
         <span id="attachCountLabel">Each generated PDF supports a maximum of 15 attachments.</span>
       </div>
-      <button id="okBtn" style="background:#22c55e;color:#fff;border:none;border-radius:4px;padding:7px 20px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'Open Sans',Arial,sans-serif"><span class="sym" style="font-size:16px">print</span> Ok</button>
-      <button id="attachBtn" style="background:#3b82f6;color:#fff;border:none;border-radius:4px;padding:7px 14px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'Open Sans',Arial,sans-serif;font-size:12px;font-weight:600"><span class="sym" style="font-size:16px">attach_file</span> Attach Images</button>
-      <button id="cancelBtn" style="background:#4b5563;color:#e5e7eb;border:none;border-radius:4px;padding:7px 20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Open Sans',Arial,sans-serif">Cancel</button>
+      <button id="okBtn" class="act-btn act-btn-green"><span class="sym" style="font-size:16px">print</span> Ok</button>
+      <button id="attachBtn" class="act-btn act-btn-blue"><span class="sym" style="font-size:16px">attach_file</span> Attach Images</button>
+      <button id="cancelBtn" class="act-btn act-btn-grey">Cancel</button>
     </div>
   </div>
 </div>
 
 <!-- ATTACH IMAGES MODAL -->
 <div class="modal-overlay" id="attachImagesModal">
-  <div style="background:#2b333b;border-radius:8px;width:1000px;max-width:97vw;max-height:60vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.8)">
-    <div style="display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid #374151;flex-shrink:0">
+  <div class="modal-box" style="width:1000px;max-width:97vw;max-height:60vh;display:flex;flex-direction:column">
+    <div class="modal-hdr" style="flex-shrink:0">
       <span class="sym" style="color:#3b82f6;font-size:22px">print</span>
-      <span style="color:#e5e7eb;font-weight:700;font-size:16px">Print Options - Image Attachments</span>
+      <span class="modal-hdr-title">Print Options - Image Attachments</span>
     </div>
     <div id="attachModalBody" style="flex:1;overflow-y:auto;padding:16px 24px;background:transparent;margin-right:8px"></div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid #374151;flex-shrink:0">
-      <button id="attachOkBtn" style="background:#22c55e;color:#fff;border:none;border-radius:4px;padding:7px 20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Open Sans',Arial,sans-serif">Ok</button>
-      <button id="attachCancelBtn" style="background:#4b5563;color:#e5e7eb;border:none;border-radius:4px;padding:7px 20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Open Sans',Arial,sans-serif">Cancel</button>
+    <div class="modal-ftr" style="flex-shrink:0">
+      <button id="attachOkBtn" class="act-btn act-btn-green">Ok</button>
+      <button id="attachCancelBtn" class="act-btn act-btn-grey">Cancel</button>
     </div>
   </div>
 </div>
@@ -673,7 +810,7 @@
     function carBox(d, q) {
       return '<div class="s-car">'
         + '<img src="' + CAR_IMGS[d.img] + '" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
-        + '<div style="display:none;width:100%;height:70px;align-items:center;justify-content:center;background:#16191d"><span class="sym" style="font-size:32px;color:#627384">directions_car</span></div>'
+        + '<div style="display:none;width:100%;height:70px;align-items:center;justify-content:center;background:#16191d"><span class="sym" style="font-size:32px;color:#6b7280">directions_car</span></div>'
         + '<span class="s-car-reg">' + hl(d.reg, q) + '</span>'
         + '</div>';
     }
